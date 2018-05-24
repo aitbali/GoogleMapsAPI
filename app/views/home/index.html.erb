@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<p>Latitude : <input id="input1"></p>
+    <p>Longitude : <input id="input2"></p>
+    <p>Message : <input id="input3"></p>
+ 
+ 	<button id="Latitude" onclick="myMap();">
+ 	<script>function myMap() {
+  	var input1 = document.querySelector('#input1').value;
+	var input2 = document.querySelector('#input2').value;
+	var input3 = document.querySelector('#input3').value;
+  	var a = parseFloat(input1); 
+	var b = parseFloat(input2);
+	var c = String(input3);
+	
+  	var mapCanvas = document.getElementById("map");
+  	var myCenter=new google.maps.LatLng(input1,input2);
+  	var mapOptions = {center: myCenter, zoom: 5};
+  	var map = new google.maps.Map(mapCanvas, mapOptions);
+  	var marker = new google.maps.Marker({
+    position: myCenter,
+    animation: google.maps.Animation.BOUNCE
+  	});
+  	marker.setMap(map);
+  	var infowindow = new google.maps.InfoWindow({
+  	content:input3
+  	});
+  	google.maps.event.addListener(marker, 'click', function() {
+  	infowindow.open(map,marker);
+  	});
+ 
+	}
+	</script>SEND</button>
+
+
+	<div id="map" style="width:100%;height:500px"></div>
+
+	<script>
+
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=<% ENV['YOUR_API_KEY'] %>&callback=myMap"></script>
+
+</body>
+</html>
